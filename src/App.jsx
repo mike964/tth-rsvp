@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
-import GuestList from './MainContent/GuestList/index'
-import Counter from './MainContent/Counter'
+import Counter from './components/Counter'
+import GuestList from './components/Guests/GuestList'
 
 class App extends Component {
 	state = {
