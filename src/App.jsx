@@ -13,7 +13,7 @@ class App extends Component {
 		],
 	}
 
-	lastGuestId = 0
+	lastGuestId = 2
 
 	newGuestId = () => {
 		const id = this.lastGuestId
