@@ -1,42 +1,49 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import GuestName from './GuestName';
+import { useState } from 'react'
+import PropTypes from 'prop-types'
+import GuestName from './GuestName'
 
-const Guest = props =>
+const Guest = ({
+	name,
+	setName,
+	isConfirmed,
+	handleConfirmation,
+	handleRemove,
+}) => {
+	const [isEditing, setIsEditing] = useState(false)
 
-    <li>
+	return (
+		<li>
+			<GuestName
+				isEditing={isEditing}
+				handleNameEdits={e => setName(e.target.value)}>
+				{name}
+			</GuestName>
 
-      <GuestName 
-      isEditing = {props.isEditing}
-      handleNameEdits= {e => props.setName(e.target.value)}
-      >
-        {props.name}
-      </GuestName >
+			<label>
+				<input
+					type='checkbox'
+					checked={isConfirmed}
+					onChange={handleConfirmation}
+				/>{' '}
+				Confirmed
+			</label>
 
-      <label>
-        <input 
-          type="checkbox" 
-          checked={props.isConfirmed} 
-          onChange= {props.handleConfirmation}
-        /> Confirmed
-      </label>
-
-      <button onClick= {props.handleToggleEditing}>
-        {props.isEditing ? "Save" : "Edit"}  
-      </button>
-      <button onClick= {props.handleRemove}>remove</button>
-
-    </li>;
-
+			<button onClick={() => setIsEditing(!isEditing)}>
+				{isEditing ? 'Save' : 'Edit'}
+			</button>
+			<button onClick={handleRemove}> X </button>
+		</li>
+	)
+}
 
 Guest.propoType = {
-    name: PropTypes.string.isRequired,
-    isConfirmed: PropTypes.bool.isRequired,
-    isEditing: PropTypes.bool.isRequired,
-    handleConfirmation: PropTypes.func.isRequired,
-    handleToggleEditing: PropTypes.func.isRequired,
-    setName: PropTypes.func.isRequired,
-    handleRemove: PropTypes.func.isRequired
-  }
+	name: PropTypes.string.isRequired,
+	isConfirmed: PropTypes.bool.isRequired,
+	isEditing: PropTypes.bool.isRequired,
+	handleConfirmation: PropTypes.func.isRequired,
+	handleToggleEditing: PropTypes.func.isRequired,
+	setName: PropTypes.func.isRequired,
+	handleRemove: PropTypes.func.isRequired,
+}
 
-export default Guest;
+export default Guest
